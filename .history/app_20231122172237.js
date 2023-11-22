@@ -27,7 +27,7 @@ app.post("/event_create", (req, res) => {
   const event_id = req.body.eventid;
   const event_kirjasto = req.body.kirjasto;
   const event_name = req.body.eventname;
-  const event_date = req.body.eventdate;
+  const event_date = req.body.eventdate.Date;
   const event_time = req.body.eventtime;
   const event_location = req.body.location;
 

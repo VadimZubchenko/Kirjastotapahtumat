@@ -12,21 +12,14 @@ form {
 }
 
 table {
-    border-collapse: collapse;
     width: 100%;
+    border-collapse: collapse;
   }
-
-  modal-content {
-    width: 200%;
-  }
-  
   th, td {
-    text-align: left;
-    padding: 8px;
+    padding: 10px;
   }
-  
-  tr:nth-child(even) {
-    background-color: #D6EEEE;
+  tr {
+    border-bottom: 1px solid #ddd;
   }
 
 

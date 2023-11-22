@@ -78,7 +78,7 @@ app.get("/events", (req, res) => {
   console.log("Fetching events: ");
 
   const queryString =
-    "SELECT Event_Kirjasto, Event_Name, Event_Date, Event_Time, Event_Location FROM event";
+    "SELECT Event_Kirjasto, Event_Name, Event_Date AS Event_d, Event_Time, Event_Location FROM event";
   getConnection().query(queryString, (err, rows, fields) => {
     if (err) {
       console.log("Failed to query for users: " + err);
