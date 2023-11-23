@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Helsingin kirjastot</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
+    />
+
+    <link rel="stylesheet" href="library.css" type="text/css" />
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <style>
+    table {
+      background-color: lightsteelblue;
+      font-family: arial, sans-serif;
+      border-radius: 10px;
+      width: 100%;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+      font-weight: bold;
+    }
+
+    img,
+    div,
+    tr:nth-child(even) {
+      background-color: white;
+    }
+    .button {
+      background-color: red;
+      border: none;
+      color: black;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 16px;
+    }
+
+    .button:hover {
+      background-color: darkred;
+    }
+    form,
+    input {
+      background-color: lightsteelblue;
+      font-size: 16px;
+    }
+    h3 {
+      font-size: 16px;
+    }
+  </style>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script>
+    var db_data;
+    var j = 0;
+    $.ajax({
+      url: "/upcoming_events",
+      type: "GET",
+      dataType: "json",
+      success: (data) => {
+        console.log("You received some data!", data);
+
+        db_data = data;
+      },
+    });
+
+    for (j in db_data) {
+      //Seuraava tapahtuma
+      console.log("Kirjasto DB :", db_data[j].Event_Kirjasto);
+    }
+
+    // var xmlhttp = new XMLHttpRequest();
+    // var url =
+    //   "https://api.kirjastot.fi/v3/organisation?branch_type=library&city.name=helsinki";
+    // xmlhttp.onreadystatechange = function () {
+    //   if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+    //     var myArr = JSON.parse(xmlhttp.responseText);
+    //     myFunction(myArr.items); // 3
+    //   }
+    // };
+    // xmlhttp.open("GET", url, true); // 4
+    // xmlhttp.send();
+    // function myFunction(arr) {
+    //   var out = "";
+    //   out += "<table border='3'>";
+    //   out += '<td span style="font-size:20px; text-align:center">Kirjasto</td>';
+    //   out +=
+    //     '<td span style="font-size:20px; text-align:center"><a href="index.html"/>Tapahtumat</td>';
+    //   out += '<td span style="font-size:20px; text-align:center">Osoite</td>';
+    //   out +=
+    //     '<td span style="font-size:20px; text-align:center">Kotisivut</td>';
+    //   out +=
+    //     '<td span style="font-size:20px; text-align:center">Sähköpostiosoite</td>';
+    //   out += "</tr>";
+
+    //   var i;
+    //   for (i in arr) {
+    //     out +=
+    //       '<td><a href="' +
+    //       arr[i].homepage.fi +
+    //       '"</a>' +
+    //       arr[i].name.fi +
+    //       "</td>";
+    //     out += "<td>Pikkujoulut</td>";
+    //     out += "<td>" + arr[i].address.street.fi;
+    //     +"</td>";
+    //     out += "<td>" + arr[i].homepage.fi;
+    //     +"</td>";
+    //     out += "<td>" + arr[i].email.fi;
+    //     +"</td>";
+    //     out += "</tr>";
+    //   }
+
+    //   out += "</table>";
+
+    //   document.getElementById("kirjastot").innerHTML = out; // 6
+    // }
+  </script>
+
+  <body>
+    <div id="kirjastot"></div>
+
+    <script>
+      var xmlhttp = new XMLHttpRequest();
+      var url =
+        "https://api.kirjastot.fi/v3/organisation?branch_type=library&city.name=helsinki";
+      xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+          var myArr = JSON.parse(xmlhttp.responseText);
+          myFunction(myArr.items); // 3
+        }
+      };
+      xmlhttp.open("GET", url, true); // 4
+      xmlhttp.send();
+
+      function myFunction(arr) {
+        var out = "";
+        out += "<table border='3'>";
+        out +=
+          '<td span style="font-size:20px; text-align:center"  ><a href="index.html"</a>Kirjastot</td>';
+        out +=
+          '<td span style="font-size:20px; text-align:center"  >Seuraava tapahtuma</td>';
+        out += '<td span style="font-size:20px; text-align:center">Osoite</td>';
+        out +=
+          '<td span style="font-size:20px; text-align:center">Home page</td>';
+        out += '<td span style="font-size:20px; text-align:center">Email</td>';
+        out += "</tr>";
+
+        var event_date;
+        var i;
+        var j;
+        for (i in arr) {
+          //Etsi kirjasto db_data:sta
+          event_date = "-";
+          for (j in db_data) {
+            console.log("Mikä kirjasto varattu".db_data[j].Event_Kirjasto);
+            //Seuraava tapahtuma
+            if (db_data[j].Event_Kirjasto == arr[i].name.fi) {
+              event_date = db_data[j].Event_Date;
+            }
+          }
+
+          out +=
+            '<td><a href="' +
+            arr[i].homepage.fi +
+            '"</a>' +
+            arr[i].name.fi +
+            "</td>";
+          out += "<td>" + event_date + "</td>";
+          out += "<td>" + arr[i].address.street.fi;
+          +"</td>";
+          out += "<td>" + arr[i].homepage.fi;
+          +"</td>";
+          out += "<td>" + arr[i].email.fi;
+          +"</td>";
+          out += "</tr>";
+        }
+        out += "</table>";
+        document.getElementById("kirjastot").innerHTML = out; // 6
+      }
+    </script>
+  </body>
+</html>
