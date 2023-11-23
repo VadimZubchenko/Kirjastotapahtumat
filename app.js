@@ -20,8 +20,10 @@ function getConnection() {
 //Luo tapahtuma
 app.post("/event_create", (req, res) => {
   console.log("Creating new event..");
+
   console.log("Name: " + req.body.eventname);
   console.log("Type: " + req.body.kirjasto);
+
 
   const event_kirjasto = req.body.kirjasto;
   const event_name = req.body.eventname;
@@ -30,10 +32,12 @@ app.post("/event_create", (req, res) => {
   const event_location = req.body.location;
 
   const queryString =
+
     "INSERT INTO event (Event_Kirjasto, Event_Name, Event_Date, Event_Time, Event_Location) VALUES(?, ?, ?, ?, ?)";
   getConnection().query(
     queryString,
     [event_kirjasto, event_name, event_date, event_time, event_location],
+
     (err, results, fields) => {
       if (err) {
         console.log("Failed to insert new event" + err);
@@ -69,7 +73,9 @@ app.get("/events", (req, res) => {
   console.log("Fetching events: ");
 
   const queryString =
+
     "SELECT Event_Kirjasto, Event_Name, DATE_FORMAT(Event_Date, '%d.%m.%Y') AS Event_Date, Date_Format(Event_Time, '%H:%i') AS Event_Time, Event_Location FROM event";
+
   getConnection().query(queryString, (err, rows, fields) => {
     if (err) {
       console.log("Failed to query for users: " + err);
