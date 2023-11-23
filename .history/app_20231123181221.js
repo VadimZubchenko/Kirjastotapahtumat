@@ -24,6 +24,7 @@ app.post("/event_create", (req, res) => {
   console.log("Name: " + req.body.eventname);
   console.log("Type: " + req.body.kirjasto);
 
+  q;
   const event_kirjasto = req.body.kirjasto;
   const event_name = req.body.eventname;
   const event_date = req.body.eventdate;
