@@ -1,0 +1,14 @@
+body {
+background-image: url("library.png");
+
+}
+
+form {
+    position: relative;
+    background-color: lightblue;
+    border-radius: 10px;
+    left: 50%;
+
+}
+
+

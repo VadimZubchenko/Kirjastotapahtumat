@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title></title>
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
+    />
+
+    <link rel="stylesheet" href="library.css" type="text/css" />
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <!-- Button trigger modal -->
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-toggle="modal"
+      data-target="#exampleModalCenter"
+    >
+      Näytä kaikki tapahtumat
+    </button>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModalCenter"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Tapahtumat</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+            <div id="status"></div>
+            <script type="text/javascript">
+              $.ajax({
+                url: "/events",
+                type: "GET",
+                dataType: "json",
+                success: (data) => {
+                  console.log("You received some data!", data);
+
+                  var out = "";
+                  out += "<table border='3'>";
+                  out +=
+                    '<td span style="font-size:20px; style="width:200"; text-align:center"  >Kirjasto</td>';
+                  out +=
+                    '<td span style="font-size:20px; text-align:center"  >Paikka</td>';
+                  out +=
+                    '<td span style="font-size:20px; text-align:center"  >Tapahtuman nimi</td>';
+                  out +=
+                    '<td span style="font-size:20px; text-align:center"  >Päivämäärä</td>';
+                  out +=
+                    '<td span style="font-size:20px; text-align:center"  >Aika</td>';
+                  out += "<tr>";
+                  var i;
+                  for (i in data) {
+                    out += "<td>" + data[i].Event_Kirjasto + "</td>";
+                    out += "<td>" + data[i].Event_Location + "</td>";
+                    out += "<td>" + data[i].Event_Name + "</td>";
+                    out += "<td>" + data[i].Event_Date + "</td>";
+                    out += "<td>" + data[i].Event_Time + "</td>";
+                    out += "</tr>";
+                  }
+                  out += "</table>";
+
+                  $("#status").html(out);
+                },
+              });
+            </script>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Sulje
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <form action="/event_create" method="POST">
+      <div class="form-group">
+        <label style="color: red">Tapahtuman nimi:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="eventname"
+          placeholder="Tapahtuman nimi"
+        />
+      </div>
+      <div class="form-group">
+        <input type="date" name="eventdate" class="form-control" />
+      </div>
+      <div class="form-group">
+        <input type="time" name="eventtime" class="form-control" />
+      </div>
+      <div class="form-group">
+        <select id="dropdown" name="kirjasto" class="form-control"></select>
+      </div>
+      <div class="form-group">
+        <input
+          type="text"
+          name="location"
+          placeholder="Tapahtumapaikka"
+          class="form-control"
+        />
+      </div>
+      <button type="submit" class="btn">Lisää tapahtuma</button>
+    </form>
+
+    <!-- Hannu koodit -->
+    <br />
+
+    <form action="">
+      <button><a href="helsingin_kirjastot.html" />Näytä kirjastot</button>
+    </form>
+    <script>
+      var dropdown = document.getElementById("dropdown");
+      dropdown.length = 0;
+      var defaultOption = document.createElement("option");
+      defaultOption.text = "Valitse kirjasto";
+      dropdown.add(defaultOption);
+      dropdown.selectedIndex = 0;
+
+      var url =
+        "https://api.kirjastot.fi/v3/organisation?branch_type=library&city.name=helsinki";
+      var xmlhttp = new XMLHttpRequest();
+
+      xmlhttp.onload = function () {
+        if (xmlhttp.status == 200) {
+          var myArr = JSON.parse(xmlhttp.responseText);
+          var arr = myArr.items;
+          var i;
+          var option;
+          console.log(arr);
+          for (i = 0; i < arr.length; i++) {
+            option = document.createElement("option");
+            option.text = arr[i].name.fi;
+            dropdown.add(option);
+          }
+        }
+      };
+      xmlhttp.open("GET", url, true);
+      xmlhttp.send();
+    </script>
+  </body>
+</html>

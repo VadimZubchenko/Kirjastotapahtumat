@@ -1,0 +1,22 @@
+body {
+background-image: url("library.png");
+
+}
+
+form {
+    position: relative;
+    background-color: lightblue;
+    border-radius: 10px;
+    left: 50%;
+
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  tr {
+    border-bottom: 1px solid #ddd;
+  }
+
+

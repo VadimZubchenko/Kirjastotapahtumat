@@ -1,0 +1,27 @@
+body {
+background-image: url("library.png");
+
+}
+
+form {
+    position: relative;
+    background-color: lightblue;
+    border-radius: 10px;
+    left: 50%;
+
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  th, td {
+    text-align: left;
+    padding: 8px;
+  }
+  tr:nth-child(even) {
+    background-color: #D6EEEE;
+  }
+
+
