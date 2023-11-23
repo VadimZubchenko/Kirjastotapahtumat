@@ -20,11 +20,9 @@ function getConnection() {
 //Luo tapahtuma
 app.post("/event_create", (req, res) => {
   console.log("Creating new event..");
-  console.log("Event id: " + req.body.create_id);
-  console.log("Name: " + req.body.create_name);
-  console.log("Type: " + req.body.create_type);
+  console.log("Name: " + req.body.eventname);
+  console.log("Type: " + req.body.kirjasto);
 
-  const event_id = req.body.eventid;
   const event_kirjasto = req.body.kirjasto;
   const event_name = req.body.eventname;
   const event_date = req.body.eventdate;
@@ -32,17 +30,10 @@ app.post("/event_create", (req, res) => {
   const event_location = req.body.location;
 
   const queryString =
-    "INSERT INTO event (Event_Id, Event_Kirjasto, Event_Name, Event_Date, Event_Time, Event_Location) VALUES(?, ?, ?, ?, ?, ?)";
+    "INSERT INTO event (Event_Kirjasto, Event_Name, Event_Date, Event_Time, Event_Location) VALUES(?, ?, ?, ?, ?)";
   getConnection().query(
     queryString,
-    [
-      event_id,
-      event_kirjasto,
-      event_name,
-      event_date,
-      event_time,
-      event_location,
-    ],
+    [event_kirjasto, event_name, event_date, event_time, event_location],
     (err, results, fields) => {
       if (err) {
         console.log("Failed to insert new event" + err);
@@ -60,8 +51,8 @@ app.get("/upcoming_events", (req, res) => {
   console.log("Fetching events: ");
 
   const queryString =
-    "SELECT Event_Name, MAX(Event_Date) AS Event_d, Event_Time, Event_Location FROM event WHERE Event_Date > " +
-    Date.now();
+    "SELECT Event_Kirjasto, Event_Name, DATE_FORMAT(Event_Date, '%d.%m.%Y') AS Event_Date, Date_Format(Event_Time, '%H:%i') AS Event_Time, Event_Time, Event_Location FROM event WHERE Event_Date > CURRENT_DATE()";
+
   getConnection().query(queryString, (err, rows, fields) => {
     if (err) {
       console.log("Failed to query for users: " + err);
@@ -78,7 +69,7 @@ app.get("/events", (req, res) => {
   console.log("Fetching events: ");
 
   const queryString =
-    "SELECT Event_Kirjasto, Event_Name, Event_Date, Event_Time, Event_Location FROM event";
+    "SELECT Event_Kirjasto, Event_Name, DATE_FORMAT(Event_Date, '%d.%m.%Y') AS Event_Date, Date_Format(Event_Time, '%H:%i') AS Event_Time, Event_Location FROM event";
   getConnection().query(queryString, (err, rows, fields) => {
     if (err) {
       console.log("Failed to query for users: " + err);
