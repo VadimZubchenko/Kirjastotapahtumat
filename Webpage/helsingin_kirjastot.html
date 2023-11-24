@@ -86,7 +86,7 @@
 
   <script>
     var db_data;
-    var j = 0;
+
     $.ajax({
       url: "/upcoming_events",
       type: "GET",
@@ -97,11 +97,6 @@
         db_data = data;
       },
     });
-
-    for (j in db_data) {
-      //Seuraava tapahtuma
-      console.log("Kirjasto DB :", db_data[j].Event_Kirjasto);
-    }
   </script>
 
   <body>
@@ -137,7 +132,7 @@
         var i;
         var j;
         for (i in arr) {
-          //Etsi kirjasto db_data:sta
+          //Etsi varatut kirjastot db_data:sta
           event_date = "-";
           for (j in db_data) {
             //Vertaillaan varattujen kirjastot API-kirjostoihin

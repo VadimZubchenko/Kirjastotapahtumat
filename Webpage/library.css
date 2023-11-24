@@ -4,12 +4,13 @@ background-image: url("library.png");
 }
 
 form {
-    position: relative;
-    background-color: lightblue;
+    background-color: rgb(127, 161, 255);
     border-radius: 10px;
     left: 50%;
 
 }
+
+
 
 table {
     border-collapse: collapse;
@@ -17,8 +18,10 @@ table {
   }
 
   modal-content {
+    border-radius: 20px;
     width: 200%;
   }
+
   
   th, td {
     text-align: left;
@@ -26,7 +29,51 @@ table {
   }
   
   tr:nth-child(even) {
-    background-color: #D6EEEE;
+    background-color: rgb(127, 161, 255);
+  }
+  
+  .modal-header {
+    background-color: rgb(127, 161, 255);
+
+  }
+
+  .border {
+    border: 2px blue;
+  }
+  
+  .right {
+    margin-left:35%;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background-color: aquamarine;
+  }
+
+  .center {
+    position: relative;
+    margin-top: 30px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    border-radius: 10px;
+    background-color: aquamarine;
+  }
+
+
+  .left {
+    margin-left: 5px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background-color: aquamarine;
+  }
+  
+  
+  .ml-auto {
+    margin-left:auto;
+  }
+  
+  .d-block {
+    display:block;
   }
 
 

@@ -1,10 +1,15 @@
+//The Express provide tooling for HTTP server,
+//making solution for SPA, websites, hybrids, or public HTTP APIs.
 const express = require("express");
 const app = express();
+//HTTP request logger middleware
 const morgan = require("morgan");
+//To access a MySQL database with Node.js
 const mysql = require("mysql");
 const bodyParser = require("body-parser");
 
 app.use(express.static("./Webpage"));
+
 app.use(morgan("combined"));
 app.use(bodyParser.urlencoded({ extended: false }));
 

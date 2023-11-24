@@ -18,15 +18,17 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   </head>
   <body>
-    <!-- Button trigger modal -->
-    <button
-      type="button"
-      class="btn btn-primary"
-      data-toggle="modal"
-      data-target="#exampleModalCenter"
-    >
-      Näytä kaikki tapahtumat
-    </button>
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <!-- Button trigger modal -->
+        <button
+          type="button"
+          class="btn-lg center"
+          data-toggle="modal"
+          data-target="#exampleModalCenter"
+        >
+          Näytä kaikki tapahtumat
+        </button>
+    </div>
 
     <!-- Modal -->
     <div
@@ -40,13 +42,14 @@
       <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title" id="exampleModalLongTitle">Tapahtumat</h4>
+            <h3 class="modal-title text-center" id="exampleModalLongTitle">Tapahtumat</h3>
             <button
               type="button"
               class="close"
               data-dismiss="modal"
               aria-label="Close"
             >
+            <!-- &times; on 'x'-merkki on HTML-page -->
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -113,44 +116,45 @@
         </div>
       </div>
     </div>
-    <form action="/event_create" method="POST">
+    
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title text-center mx-auto" id="exampleModalLongTitle">Kirjaston tilojen varaus</h3>
+    <form  action="/event_create" method="POST">
       <div class="form-group">
-        <label style="color: red">Tapahtuman varaus</label>
+        <label></label>
         <input
           type="text"
           class="form-control"
+          style="font-size: large;"
           name="eventname"
           placeholder="Tapahtuman nimi"
         />
       </div>
       <div class="form-group">
-        <input type="date" name="eventdate" class="form-control" />
+        <input type="date" name="eventdate" class="form-control" style="font-size: large;" />
       </div>
       <div class="form-group">
-        <input type="time" name="eventtime" class="form-control" />
+        <input type="time" name="eventtime" class="form-control" style="font-size: large;" />
       </div>
       <div class="form-group">
-        <select id="dropdown" name="kirjasto" class="form-control"></select>
+        <select id="dropdown" name="kirjasto" class="form-control" style="font-size: large;"></select>
       </div>
       <div class="form-group">
-        <select id="dropdown2" name="location" class="form-control"></select>
-        <!-- <input
-          type="text"
-          name="location"
-          placeholder="Tapahtumapaikka"
-          class="form-control"
-        /> -->
-      </div>
-      <button type="submit" class="btn">Lisää tapahtuma</button>
-    </form>
+        <select id="dropdown2" name="location" class="form-control" style="font-size: large;"></select>
+        </div>
+        <div class="d-grid gap-3">
+        <button type="submit" class="left btn-lg">Lisää varaukseen</button>
+        <!-- change to the second htlm-page -->
+        <button class="right btn-lg" style="font-size: large"><a href="helsingin_kirjastot.html">Näytä varaukset</button>
+        </div>
+        </form>
+</div>
+</div> 
+</div>
 
-    <br />
-
-    <form action="">
-        <!-- change to second htlm-page -->
-      <button><a href="helsingin_kirjastot.html">Näytä kirjastot</button>
-    </form>
-    <script>
+   <script>
       var dropdown = document.getElementById("dropdown");
       dropdown.length = 0;
       var defaultOption = document.createElement("option");
@@ -178,8 +182,7 @@
       };
       xmlhttp.open("GET", url_libr, true);
       xmlhttp.send();
-</script>
-<script>
+
   //dropdown paikan varaukseen
       var dropdown2 = document.getElementById("dropdown2");
       dropdown2.length = 0;
