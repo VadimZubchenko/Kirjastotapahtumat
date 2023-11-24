@@ -4,14 +4,28 @@
 Kirjastotapahtumat
 
 **KUVAUS** <br>
-Sovellus auttaa käyttäjälle nopeasti ja havainnollisesti saada selville tietoa kaikista Helsingin alueen kirjastoissa tulevista tapahtumista.
+Sovellus auttaa käyttäjää nopeasti ja havainnollisesti saada selville tietoa kaikista Helsingin alueen kirjastoissa tulevista tapahtumista.
 
 **KÄYTTÖ** <br>
 Sovelluksen pääsivulla käyttäjä näkee kaikin tulevin tapahtumin luettelun, josta hän pystyy valita häntä kiinnostavan. Tapahtumien nimet toimivat linkkeinä, joilla sivu vaihtuu toiseen.
 Toisessa sivussa on esitetty kirjastojen yhteiskuva, kuten kirjaston nimi, tapahtuma, osoite, websivu, sekä sähköposti.
 
 **KÄYNNISTÄMINEN** <br>
-Sovellus avautuu käynnistämällä app.js-tiedosto noden kautta ja menemellä selaimessa osoitteeseen http://localhost:8081/
+Sovelluksen toimivuus edellyttää MySql “library_project”-tietokannan ja sen Event-taulukon käyttöä. Taulukkon luomiseen
+käytetään seuraava SQL-komentti <br><br>
+
+CREATE DATABASE library_project; <br>
+
+USE library_project; <br>
+
+CREATE TABLE event (Event_Id int NOT NULL AUTO_INCREMENT, Event_Kirjasto varchar(255), Event_Name varchar(255), Event_Date DATE, Event_Time TIME, Event_Location varchar(255), PRIMARY KEY (Event_Id)); <br>
+
+#1 Sovellus avautuu käynnistämällä app.js-tiedosto noden kautta: <br>
+node app.js <br>
+tai<br>
+nodemon start<br>
+
+#2 Menemellä selaimessa osoitteeseen http://localhost:8081/ <br>
 
 **REST** <br>
 Sovelluksen tiedot ovat saatavana ja päivitettävänä myös käyttäen seuraavia rest-kutsuja:
